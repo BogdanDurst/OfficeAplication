@@ -3,4 +3,19 @@
   <groupId>ua.bodo.office</groupId>
   <artifactId>officeAplication</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  
+  	<dependencies>
+  		<dependency>
+  			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.3.10.Final</version>
+  		</dependency>
+  	
+  		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.35</version>
+		</dependency>
+	</dependencies>
+	
 </project>
