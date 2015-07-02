@@ -1,10 +1,15 @@
 package ua.bodo.office.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 
@@ -33,11 +38,34 @@ public class User {
 	@Column(name="password", length=45, nullable=false)
 	private String password;
 	
-	public User(){
+	@ManyToMany
+	@JoinTable(name="RoleHasUser", joinColumns = {@JoinColumn(name="userId")}, inverseJoinColumns = {@JoinColumn(name="roleId")})
+	private List<Role> roles;
 	
+	@ManyToMany
+	@JoinTable(name="EventHasUser", joinColumns = {@JoinColumn(name="userId")}, inverseJoinColumns = {@JoinColumn(name="eventId")})
+	public List<Event> getEvents() {
+		return events;
 	}
+
 	
 	
+	public User(){
+		
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+	private List<Event> events;
+	
+	
+	public List<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 	public void setId(long id){
 		this.id = id;
 	}	

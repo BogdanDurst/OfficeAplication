@@ -1,11 +1,15 @@
 package ua.bodo.office.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -35,10 +39,26 @@ public class Event {
 	@Column(name="isComfirmed")
 	private boolean isComfirmed;
 	
+	@ManyToMany
+	@JoinTable(name="EventHasUser", joinColumns={@JoinColumn(name="eventId")}, inverseJoinColumns={@JoinColumn(name="userId")})
+	private List<User> users;
+	
+	
+	
 	public Event(){
 		
 	}
 	
+	
+	
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
 	public void setId(long id){
 		this.id = id;
 	}

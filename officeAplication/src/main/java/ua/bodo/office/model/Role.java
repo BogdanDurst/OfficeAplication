@@ -2,11 +2,16 @@ package ua.bodo.office.model;
 
 
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,9 +26,16 @@ public class Role {
 	@Column(name="name", length=45)
 	private String name;
 	
+	@ManyToMany
+	@JoinTable(name = "UserHasRole", joinColumns = {@JoinColumn(name = "roleId")}, inverseJoinColumns = {@JoinColumn(name="userId")})
+	private List<User> users;
 	
 	public Role(){
 		
+	}
+	public Role(long id, String name){
+		this.id = id;
+		this.name = name;
 	}
 	
 	public void setId(long id){
@@ -33,6 +45,12 @@ public class Role {
 		this.name = name;
 	}
 	
+	public List<User> getUsers() {
+		return users;
+	}
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
 	public long getId(){
 		return id;
 	}
